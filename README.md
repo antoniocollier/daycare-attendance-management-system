@@ -37,3 +37,12 @@ python app.py
 
 Then open:
 http://127.0.0.1:5000
+
+## Demo Accounts
+- Admin: Username:admin1 / Password:admin123
+- Employee: teacher1 / Password:teach123
+- Parent 1: parent1 / Password:parent123
+- Parent 2: parent2 / Password:parent234
+- Parent 3: parent3 / Password:parent345
+
+
