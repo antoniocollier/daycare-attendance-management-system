@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="topbar">
+        <div class="topbar-title">Daycare Attendance Management System</div>
+        <div class="topbar-user">Logged in as {{ username }} ({{ role }})</div>
+    </div>
+
+    <div class="container">
+        <h1>Attendance History</h1>
+
+        {% if child %}
+            <p><strong>Child Name:</strong> {{ child['name'] }}</p>
+            <p><strong>Date of Birth:</strong> {{ child['date_of_birth'] }}</p>
+            <p><strong>Grade:</strong> {{ child['grade'] }}</p>
+            <p><strong>Age:</strong> {{ child['age'] }}</p>
+            <p><strong>Immunization Status:</strong> {{ child['immunization_status'] }}</p>
+
+            <h2>Attendance Records</h2>
+
+            {% if attendance_records %}
+                <table>
+                    <tr>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Check-In</th>
+                        <th>Check-Out</th>
+                    </tr>
+                    {% for record in attendance_records %}
+                    <tr>
+                        <td>{{ record['date'] }}</td>
+                        <td>{{ record['status'] }}</td>
+                        <td>{{ record['check_in_time'] if record['check_in_time'] else '' }}</td>
+                        <td>{{ record['check_out_time'] if record['check_out_time'] else '' }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No attendance records found.</p>
+            {% endif %}
+        {% else %}
+            <p>No child is linked to this parent account.</p>
+        {% endif %}
+
+        <p style="margin-top:20px;"><a href="/parent">Back to Parent Dashboard</a></p>
+        <p><a href="/logout">Logout</a></p>
+    </div>
+</body>
+</html>

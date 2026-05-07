@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Attendance History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="topbar">
+        <div class="topbar-title">Daycare Attendance Management System</div>
+        <div class="topbar-user">Logged in as {{ username }} ({{ role }})</div>
+    </div>
+
+    <div class="container">
+        <h1>Admin Attendance History</h1>
+
+        {% if records %}
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Child Name</th>
+                    <th>Classroom</th>
+                    <th>Status</th>
+                </tr>
+                {% for record in records %}
+                <tr>
+                    <td>{{ record['date'] }}</td>
+                    <td>{{ record['child_name'] }}</td>
+                    <td>{{ record['classroom'] }}</td>
+                    <td>{{ record['status'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No attendance records found.</p>
+        {% endif %}
+
+        <p style="margin-top:20px;"><a href="/admin">Back to Admin Dashboard</a></p>
+        <p><a href="/logout">Logout</a></p>
+    </div>
+</body>
+</html>

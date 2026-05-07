@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Parent Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="topbar">
+        <div class="topbar-title">Daycare Attendance Management System</div>
+        <div class="topbar-user">Logged in as {{ username }} ({{ role }})</div>
+    </div>
+
+    <div class="container">
+        <h1>Parent Dashboard</h1>
+        <p class="welcome-text">Welcome, {{ username }}</p>
+
+        {% if child %}
+            <div class="panel">
+                <h2>Your Child</h2>
+                <p><strong>Name:</strong> {{ child['name'] }}</p>
+                <p><strong>Date of Birth:</strong> {{ child['date_of_birth'] }}</p>
+                <p><strong>Grade:</strong> {{ child['grade'] }}</p>
+                <p><strong>Age:</strong> {{ child['age'] }}</p>
+                <p><strong>Immunization Status:</strong> {{ child['immunization_status'] }}</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Records</h3>
+                    <p>{{ attendance_count }}</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Present</h3>
+                    <p>{{ present_count }}</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Absent</h3>
+                    <p>{{ absent_count }}</p>
+                </div>
+            </div>
+
+            <div class="action-section">
+                <h2>Quick Actions</h2>
+                <div class="action-buttons">
+                    <a class="action-btn" href="/parent/history">View Attendance History</a>
+                    <a class="action-btn secondary" href="/logout">Logout</a>
+                </div>
+            </div>
+        {% else %}
+            <div class="panel">
+                <h2>No Child Linked</h2>
+                <p>No child is currently linked to this parent account.</p>
+            </div>
+            <div class="action-buttons">
+                <a class="action-btn secondary" href="/logout">Logout</a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

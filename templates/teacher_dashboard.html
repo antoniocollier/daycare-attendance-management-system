@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="topbar">
+        <div class="topbar-title">Daycare Attendance Management System</div>
+        <div class="topbar-user">Logged in as {{ username }} (Employee)</div>
+    </div>
+
+    <div class="container">
+        <h1>Employee Dashboard</h1>
+        <p class="welcome-text">Welcome, {{ username }}</p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Children</h3>
+                <p>{{ total_children }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Present Today</h3>
+                <p>{{ present_today }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Absent Today</h3>
+                <p>{{ absent_today }}</p>
+            </div>
+        </div>
+
+        <div class="action-section">
+            <h2>Quick Actions</h2>
+            <div class="action-buttons">
+                <a class="action-btn" href="/attendance">Mark Attendance</a>
+                <a class="action-btn" href="/history">Attendance History</a>
+                <a class="action-btn secondary" href="/logout">Logout</a>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Children in System</h2>
+            {% if children %}
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Grade</th>
+                        <th>Schedule</th>
+                        <th>Parent</th>
+                        <th>Phone</th>
+                        <th>Emergency Contact</th>
+                        <th>Immunization</th>
+                    </tr>
+                    {% for child in children %}
+                    <tr>
+                        <td>{{ child['name'] }}</td>
+                        <td>{{ child['age'] }}</td>
+                        <td>{{ child['grade'] }}</td>
+                        <td>{{ child['schedule_type'] }}</td>
+                        <td>{{ child['parent_name'] }}</td>
+                        <td>{{ child['parent_phone'] }}</td>
+                        <td>{{ child['emergency_contact'] }}</td>
+                        <td>{{ child['immunization_status'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No children available.</p>
+            {% endif %}
+        </div>
+
+        <p class="small-note">Summary date: {{ today_str }}</p>
+    </div>
+</body>
+</html>
