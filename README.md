@@ -29,6 +29,26 @@ This project was created as a Software Engineering class project and designed to
 - CSS
 - Git and GitHub
 
+## Screenshots
+
+### Login Page
+![Login Page](screenshots/login.png)
+
+### Admin Dashboard
+![Admin Dashboard](screenshots/admin-dashboard.png)
+
+### Manage Children Form
+![Manage Children Form](screenshots/manage-children-form.png)
+
+### Manage Children List
+![Manage Children List](screenshots/manage-children-list.png)
+
+### Mark Attendance
+![Mark Attendance](screenshots/mark-attendance.png)
+
+### Parent Dashboard
+![Parent Dashboard](screenshots/parent-dashboard.png)
+
 ## User Roles
 
 ### Administrator
@@ -86,6 +106,14 @@ daycare_project/
 ├── README.md
 ├── .gitignore
 │
+├── screenshots/
+│   ├── login.png
+│   ├── admin-dashboard.png
+│   ├── manage-children-form.png
+│   ├── manage-children-list.png
+│   ├── mark-attendance.png
+│   └── parent-dashboard.png
+│
 ├── static/
 │   └── style.css
 │
@@ -132,4 +160,3 @@ This project is currently designed for local development and demonstration purpo
 Antonio Collier  
 Management Information Systems Student  
 GitHub: github.com/antoniocollier
-
