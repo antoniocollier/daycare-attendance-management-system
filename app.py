@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
+from werkzeug.security import check_password_hash
 import sqlite3
+import os
 from datetime import date
 
 app = Flask(__name__)
-app.secret_key = "daycare_secret_key"
+app.secret_key = os.environ.get("SECRET_KEY", "dev_secret_key_change_later")
 
 
 def get_db_connection():
@@ -41,12 +43,12 @@ def login():
 
         conn = get_db_connection()
         user = conn.execute(
-            "SELECT * FROM users WHERE username = ? AND password = ?",
-            (username, password)
+            "SELECT * FROM users WHERE username = ?",
+            (username,)
         ).fetchone()
         conn.close()
 
-        if user:
+        if user and check_password_hash(user["password"], password):
             session["user_id"] = user["id"]
             session["username"] = user["username"]
             session["role"] = user["role"]

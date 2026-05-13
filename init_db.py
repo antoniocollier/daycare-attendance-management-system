@@ -1,4 +1,5 @@
 import sqlite3
+from werkzeug.security import generate_password_hash
 
 conn = sqlite3.connect("daycare.db")
 cur = conn.cursor()
@@ -46,25 +47,17 @@ CREATE TABLE attendance (
 )
 """)
 
-cur.execute(
+users = [
+    ("admin1", generate_password_hash("admin123"), "admin"),
+    ("teacher1", generate_password_hash("teach123"), "teacher"),
+    ("parent1", generate_password_hash("parent123"), "parent"),
+    ("parent2", generate_password_hash("parent234"), "parent"),
+    ("parent3", generate_password_hash("parent345"), "parent")
+]
+
+cur.executemany(
     "INSERT INTO users (username, password, role) VALUES (?, ?, ?)",
-    ("admin1", "admin123", "admin")
-)
-cur.execute(
-    "INSERT INTO users (username, password, role) VALUES (?, ?, ?)",
-    ("teacher1", "teach123", "teacher")
-)
-cur.execute(
-    "INSERT INTO users (username, password, role) VALUES (?, ?, ?)",
-    ("parent1", "parent123", "parent")
-)
-cur.execute(
-    "INSERT INTO users (username, password, role) VALUES (?, ?, ?)",
-    ("parent2", "parent234", "parent")
-)
-cur.execute(
-    "INSERT INTO users (username, password, role) VALUES (?, ?, ?)",
-    ("parent3", "parent345", "parent")
+    users
 )
 
 parent1_id = cur.execute("SELECT id FROM users WHERE username = 'parent1'").fetchone()[0]
