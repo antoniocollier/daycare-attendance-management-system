@@ -1,14 +1,21 @@
 # Daycare Attendance Management System
 
-A browser-based daycare management application built with Python, Flask, SQLite, HTML, and CSS. The system allows daycare staff to manage child records, track attendance, view attendance history, and organize parent, emergency contact, immunization, and schedule information.
+A browser-based daycare management application built with Python, Flask, SQLite, HTML, CSS, and AWS Elastic Beanstalk. The system allows daycare staff to manage child records, track attendance, view attendance history, and organize parent, emergency contact, immunization, and schedule information.
 
 ## Project Overview
 
 This project was created as a Software Engineering class project and designed to solve a real-world daycare record management problem. The application uses role-based access so administrators, employees, and parents can view different information based on their responsibilities.
 
+## Live Demo
+
+The application is deployed on AWS Elastic Beanstalk:
+
+http://daycare-single-env.eba-h6f3p4du.us-east-1.elasticbeanstalk.com
+
 ## Features
 
 - Role-based login for administrators, employees, and parents
+- Password hashing for improved account security
 - Admin dashboard for managing daycare records
 - Employee dashboard for attendance-related tasks
 - Parent dashboard for viewing child information
@@ -18,7 +25,8 @@ This project was created as a Software Engineering class project and designed to
 - Parent and emergency contact information
 - Immunization status tracking
 - Schedule type tracking
-- SQLite database with database initialization script
+- SQLite database with automatic database initialization
+- AWS Elastic Beanstalk deployment
 
 ## Technologies Used
 
@@ -27,6 +35,8 @@ This project was created as a Software Engineering class project and designed to
 - SQLite
 - HTML
 - CSS
+- AWS Elastic Beanstalk
+- Gunicorn
 - Git and GitHub
 
 ## Screenshots
@@ -68,14 +78,14 @@ Parents can view information related to their child, including attendance record
 1. Clone the repository or download the project folder.
 2. Open the project folder in VS Code or another code editor.
 3. Create and activate a virtual environment.
-4. Install Flask.
+4. Install the project dependencies.
 5. Run the database setup file.
 6. Start the Flask application.
 
 ```bash
 py -m venv venv
 .\venv\Scripts\Activate.ps1
-pip install flask
+pip install -r requirements.txt
 python init_db.py
 python app.py
 ```
@@ -103,6 +113,8 @@ daycare_project/
 │
 ├── app.py
 ├── init_db.py
+├── requirements.txt
+├── Procfile
 ├── README.md
 ├── .gitignore
 │
@@ -133,27 +145,36 @@ daycare_project/
 
 ## Database Setup
 
-The `daycare.db` file is not included in the repository because it is generated locally. To create the database, run:
+The `daycare.db` file is not included in the repository because it is generated locally. To create or reset the database, run:
 
 ```bash
 python init_db.py
 ```
 
-This creates the SQLite database and sample records needed to test the application.
+The application also includes automatic database initialization, allowing the database to be created when the app starts if the database file does not already exist.
+
+## Deployment
+
+The application is deployed using AWS Elastic Beanstalk with a Python platform environment. A `Procfile` is included so the application can be started with Gunicorn during deployment.
+
+```text
+web: gunicorn app:app
+```
 
 ## Security Note
 
-This project is currently designed for local development and demonstration purposes. Future improvements would include password hashing, stronger authentication, environment variables, and production database support before using the system in a real daycare setting.
+This project is currently designed for learning, demonstration, and portfolio purposes. Passwords are hashed, and the Flask secret key can be configured through an environment variable. Future production improvements would include stronger authentication, HTTPS with a custom domain, environment-based configuration, and a production database such as PostgreSQL or Amazon RDS.
 
 ## Future Improvements
 
-- Deploy the application online
-- Add password hashing for improved security
+- Add PostgreSQL or Amazon RDS support for production deployment
+- Add a custom domain and HTTPS configuration
 - Improve the user interface for mobile devices
-- Add PostgreSQL support for production deployment
 - Add admin reporting features
 - Add downloadable forms for parent and immunization records
-- Add cloud deployment using AWS or another hosting platform
+- Add parent document upload functionality
+- Add automated tests for important routes and database actions
+- Add CI/CD deployment workflow with GitHub Actions
 
 ## Author
 
